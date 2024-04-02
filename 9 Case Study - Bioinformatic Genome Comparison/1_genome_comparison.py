@@ -16,8 +16,8 @@ def write_html_result(filename, data, rgb):
     for q in data:
         transparency = data[q] / max(data.values())
         x.write(
-            "<div style='width:100px; border:1px solid #111; height:100px; float:left; background-color:rgba(" + rgb + "," + str(
-                transparency) + ")'>" + q + "</div>")
+            "<div style='width:100px; border:1px solid #111; height:100px; float:left; background-color:rgba(" + rgb +
+            "," + str(transparency) + "); color: #fff'>" + q + "</div>")
         if w % 4 == 0:
             x.write("<div style='clear:both'></div>")
         w += 1

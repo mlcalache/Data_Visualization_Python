@@ -25,6 +25,36 @@ def write_html_result(filename, data, rgb):
     x.close()
 
 
+def write_html_combined_result(filename, data_human, data_bacteria, rgb):
+    x = open(filename, "w")
+
+    x.write("<div style='clear:both'>Human</div>")
+
+    w = 1
+    for q in data_human:
+        transparency = data_human[q] / max(data_human.values())
+        x.write(
+            "<div style='width:100px; border:1px solid #111; height:100px; float:left; background-color:rgba(" + rgb +
+            "," + str(transparency) + "); color: #fff'>" + q + "</div>")
+        if w % 4 == 0:
+            x.write("<div style='clear:both'></div>")
+        w += 1
+
+    x.write("<div style='clear:both'>Bacteria</div>")
+
+    w = 1
+    for q in data_human:
+        transparency = data_bacteria[q] / max(data_bacteria.values())
+        x.write(
+            "<div style='width:100px; border:1px solid #111; height:100px; float:left; background-color:rgba(" + rgb +
+            "," + str(transparency) + "); color: #fff'>" + q + "</div>")
+        if w % 4 == 0:
+            x.write("<div style='clear:both'></div>")
+        w += 1
+
+    x.close()
+
+
 def create_combinations(param_input):
     combinations = {}
 
@@ -46,3 +76,5 @@ human = create_combinations(human_input)
 
 write_html_result("bacteria.html", bacteria, '0,0,255')
 write_html_result("human.html", human, '0,0,255')
+
+write_html_combined_result("combined.html", human, bacteria, '0,0,255')
